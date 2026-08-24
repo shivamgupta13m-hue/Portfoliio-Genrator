@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>PortGen - Portfolio Generator</title>
+
+    <link rel="stylesheet" href="style.css">
+<script src="script.js"></script>
+</head>
+
+
+<body>
+
+
+<!-- ==============================
+     NAVBAR
+============================== -->
+
+<nav>
+
+    <div class="logo">
+        PortGen
+    </div>
+
+    <div class="nav-links">
+
+        <a href="#">
+            Home
+        </a>
+
+        <a href="#editSection">
+            Edit
+        </a>
+
+        <a href="#designSection">
+            Templates
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- ==============================
+     HERO
+============================== -->
+
+<section class="hero">
+
+    <h1>
+        Create Your
+        <span>Professional Portfolio</span>
+    </h1>
+
+    <p>
+        Generate your portfolio from your resume
+        or create one manually.
+    </p>
+
+
+    <div class="options">
+
+
+        <!-- RESUME CARD -->
+
+        <div class="card">
+
+            <div class="icon">
+                📄
+            </div>
+
+            <h2>
+                Use My Resume
+            </h2>
+
+            <p>
+                Upload your PDF or resume image and
+                automatically create your portfolio.
+            </p>
+
+
+            <input
+                type="file"
+                id="resumeInput"
+                accept=".pdf,.png,.jpg,.jpeg"
+                hidden
+            >
+
+
+            <button
+                type="button"
+                id="uploadButton"
+                class="resume-btn"
+            >
+                📄 Upload Resume
+            </button>
+
+
+            <p id="uploadStatus"></p>
+
+        </div>
+
+
+        <!-- MANUAL CARD -->
+
+        <div class="card">
+
+            <div class="icon">
+                ✍️
+            </div>
+
+            <h2>
+                Create Manually
+            </h2>
+
+            <p>
+                Enter your details and build your
+                portfolio step-by-step.
+            </p>
+
+
+            <button
+                type="button"
+                onclick="createManually()"
+            >
+                Create Manually
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==============================
+     EXTRACTED RESUME
+============================== -->
+
+<section
+    class="resume-preview"
+    id="resumePreview"
+>
+
+    <h2>
+        Extracted Resume Text
+    </h2>
+
+
+    <textarea
+        id="resumeText"
+        placeholder="Your extracted resume text will appear here..."
+        rows="15"
+        readonly
+    ></textarea>
+
+</section>
+
+
+<!-- ==============================
+     RESUME INFORMATION
+============================== -->
+
+<div
+    id="parsedData"
+    class="parsed-data"
+>
+
+    <h2>
+        Resume Information
+    </h2>
+
+
+    <div class="info-grid">
+
+
+        <div class="info-card">
+
+            <h3>
+                👤 Name
+            </h3>
+
+            <p id="name">
+                -
+            </p>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <h3>
+                📧 Email
+            </h3>
+
+            <p id="email">
+                -
+            </p>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <h3>
+                📱 Phone
+            </h3>
+
+            <p id="phone">
+                -
+            </p>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <h3>
+                🛠️ Skills
+            </h3>
+
+            <p id="skills">
+                -
+            </p>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <h3>
+                🎓 Education
+            </h3>
+
+            <p id="education">
+                -
+            </p>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <h3>
+                🚀 Projects
+            </h3>
+
+            <p id="projects">
+                -
+            </p>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <h3>
+                💼 Experience
+            </h3>
+
+            <p id="experience">
+                -
+            </p>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <h3>
+                🏆 Certifications
+            </h3>
+
+            <p id="certifications">
+                -
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ==============================
+     EDIT SECTION
+============================== -->
+
+<section
+    class="edit-section"
+    id="editSection"
+>
+
+    <h2>
+        Edit Your Information
+    </h2>
+
+
+    <div class="edit-form">
+
+
+        <!-- NAME -->
+
+        <div class="form-group">
+
+            <label>
+                Name
+            </label>
+
+            <input
+                type="text"
+                id="editName"
+                placeholder="Your Name"
+            >
+
+        </div>
+
+
+        <!-- EMAIL -->
+
+        <div class="form-group">
+
+            <label>
+                Email
+            </label>
+
+            <input
+                type="email"
+                id="editEmail"
+                placeholder="your@email.com"
+            >
+
+        </div>
+
+
+        <!-- PHONE -->
+
+        <div class="form-group">
+
+            <label>
+                Phone
+            </label>
+
+            <input
+                type="text"
+                id="editPhone"
+                placeholder="+91 XXXXX XXXXX"
+            >
+
+        </div>
+
+
+        <!-- ABOUT -->
+
+        <div class="form-group full-width">
+
+            <label>
+                About
+            </label>
+
+            <textarea
+                id="editAbout"
+                rows="5"
+                placeholder="Write something about yourself..."
+            ></textarea>
+
+        </div>
+
+
+        <!-- SKILLS -->
+
+        <div class="form-group full-width">
+
+            <label>
+                Skills
+            </label>
+
+            <textarea
+                id="editSkills"
+                rows="3"
+                placeholder="Python, SQL, Java, Azure"
+            ></textarea>
+
+        </div>
+
+
+        <!-- EDUCATION -->
+
+        <div class="form-group full-width">
+
+            <label>
+                Education
+            </label>
+
+            <textarea
+                id="editEducation"
+                rows="5"
+                placeholder="Enter your education details..."
+            ></textarea>
+
+        </div>
+
+
+        <!-- ==============================
+             PROJECTS
+        ============================== -->
+
+        <div class="form-group full-width">
+
+            <label>
+                🚀 Projects
+            </label>
+
+
+            <div id="projectsContainer">
+
+
+                <!-- PROJECT 1 -->
+
+                <div class="project-input">
+
+                    <h3>
+                        Project 1
+                    </h3>
+
+
+                    <input
+                        type="text"
+                        class="project-title"
+                        placeholder="Project Name"
+                    >
+
+
+                    <textarea
+                        class="project-description"
+                        rows="3"
+                        placeholder="Project Description"
+                    ></textarea>
+
+
+                    <input
+                        type="url"
+                        class="project-github"
+                        placeholder="GitHub Project Link"
+                    >
+
+
+                    <input
+                        type="url"
+                        class="project-live"
+                        placeholder="Live Demo Link"
+                    >
+
+
+                    <button
+                        type="button"
+                        class="remove-project-btn"
+                        onclick="removeProject(this)"
+                    >
+                        Remove Project
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="add-project-btn"
+                onclick="addProject()"
+            >
+                + Add Another Project
+            </button>
+
+        </div>
+
+
+        <!-- ==============================
+             EXPERIENCE
+        ============================== -->
+
+        <div class="form-group full-width">
+
+            <label>
+                💼 Experience
+            </label>
+
+            <textarea
+                id="editExperience"
+                rows="5"
+                placeholder="Company, role, duration and responsibilities..."
+            ></textarea>
+        </div>
+        <!-- =========================================
+     CERTIFICATES
+========================================= -->
+
+<div class="form-group full-width">
+
+    <h3>🏆 Certifications & Certificates</h3>
+
+    <div id="certificateContainer">
+
+        <div class="certificate-item">
+
+            <input
+                type="text"
+                class="certificate-name"
+                placeholder="Certificate Name"
+            >
+
+            <input
+                type="text"
+                class="certificate-issuer"
+                placeholder="Issuing Organization"
+            >
+
+            <input
+                type="url"
+                class="certificate-link"
+                placeholder="Certificate Verification Link"
+            >
+
+            <input
+                type="file"
+                class="certificate-file"
+                accept=".pdf"
+            >
+
+            <button
+                type="button"
+                class="remove-certificate"
+                onclick="removeCertificate(this)"
+            >
+                Remove
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <button
+        type="button"
+        onclick="addCertificate()"
+    >
+        + Add Another Certificate
+    </button>
+
+    <small>
+        You can add a certificate PDF or a verification link.
+    </small>
+
+</div>
+        <!-- ==============================
+             SOCIAL LINKS
+        ============================== -->
+
+        <!-- =========================================
+     SOCIAL LINKS
+========================================= -->
+
+<div class="form-group full-width">
+
+    <h3>🌐 Professional & Social Links</h3>
+
+    <input
+        type="url"
+        id="editLinkedin"
+        placeholder="💼 LinkedIn Profile URL"
+    >
+
+    <input
+        type="url"
+        id="editGithub"
+        placeholder="🐙 GitHub Profile URL"
+    >
+
+    <input
+        type="url"
+        id="editLeetcode"
+        placeholder="💻 LeetCode Profile URL"
+    >
+
+    <input
+        type="url"
+        id="editKaggle"
+        placeholder="📊 Kaggle Profile URL"
+    >
+
+    <input
+        type="url"
+        id="editTwitter"
+        placeholder="𝕏 X / Twitter Profile URL"
+    >
+
+    <input
+        type="url"
+        id="editWebsite"
+        placeholder="🌐 Personal Website URL"
+    >
+
+</div>
+
+        <!-- ==============================
+             BACKGROUND IMAGE
+        ============================== -->
+
+        <div class="form-group full-width">
+
+            <label>
+                🖼️ Portfolio Background Image
+            </label>
+
+
+            <input
+                type="url"
+                id="editBackground"
+                placeholder="Paste background image URL"
+            >
+
+
+            <small>
+                Optional. Leave empty to use the selected
+                design's default animated background.
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==============================
+         DESIGN SELECTION
+    ============================== -->
+
+    <section
+        class="design-section"
+        id="designSection"
+    >
+
+        <h2>
+            Choose Your Portfolio Design
+        </h2>
+
+
+        <p class="design-subtitle">
+            Select one of 20 professional portfolio designs
+        </p>
+
+
+        <div class="design-grid">
+
+
+            <!-- DESIGN 1 -->
+
+            <div
+                class="design-card"
+                onclick="selectDesign(1)"
+            >
+
+                <div class="design-preview design-1">
+
+                    <h3>
+                        Modern Blue
+                    </h3>
+
+                    <p>
+                        Clean & Professional
+                    </p>
+
+                </div>
+
+                <button type="button">
+                    Select Design 1
+                </button>
+
+            </div>
+
+
+            <!-- DESIGN 2 -->
+
+            <div
+                class="design-card"
+                onclick="selectDesign(2)"
+            >
+
+                <div class="design-preview design-2">
+
+                    <h3>
+                        Minimal
+                    </h3>
+
+                    <p>
+                        Simple & Elegant
+                    </p>
+
+                </div>
+
+                <button type="button">
+                    Select Design 2
+                </button>
+
+            </div>
+
+
+            <!-- DESIGN 3 -->
+
+            <div
+                class="design-card"
+                onclick="selectDesign(3)"
+            >
+
+                <div class="design-preview design-3">
+
+                    <h3>
+                        Dark Pro
+                    </h3>
+
+                    <p>
+                        Developer Style
+                    </p>
+
+                </div>
+
+                <button type="button">
+                    Select Design 3
+                </button>
+
+            </div>
+
+
+            <!-- DESIGN 4 -->
+
+            <div
+                class="design-card"
+                onclick="selectDesign(4)"
+            >
+
+                <div class="design-preview design-4">
+
+                    <h3>
+                        Creative
+                    </h3>
+
+                    <p>
+                        Creative Portfolio
+                    </p>
+
+                </div>
+
+                <button type="button">
+                    Select Design 4
+                </button>
+
+            </div>
+
+
+            <!-- DESIGN 5 -->
+
+            <div
+                class="design-card"
+                onclick="selectDesign(5)"
+            >
+
+                <div class="design-preview design-5">
+
+                    <h3>
+                        Elegant
+                    </h3>
+
+                    <p>
+                        Professional Look
+                    </p>
+
+                </div>
+
+                <button type="button">
+                    Select Design 5
+                </button>
+
+            </div>
+
+
+            <!-- DESIGN 6 -->
+
+            <div
+                class="design-card"
+                onclick="selectDesign(6)"
+            >
+
+                <div class="design-preview design-6">
+
+                    <h3>
+                        Tech
+                    </h3>
+
+                    <p>
+                        Technology Style
+                    </p>
+
+                </div>
+
+                <button type="button">
+                    Select Design 6
+                </button>
+
+            </div>
+
+
+            <!-- DESIGN 7 -->
+
+            <div
+                class="design-card"
+                onclick="selectDesign(7)"
+            >
+
+                <div class="design-preview design-7">
+
+                    <h3>
+                        Portfolio Pro
+                    </h3>
+
+                    <p>
+                        Professional
+                    </p>
+
+                </div>
+
+                <button type="button">
+                    Select Design 7
+                </button>
+
+            </div>
+
+
+            <!-- DESIGN 8 -->
+
+            <div
+                class="design-card"
+                onclick="selectDesign(8)"
+            >
+
+                <div class="design-preview design-8">
+
+                    <h3>
+                        Classic
+                    </h3>
+
+                    <p>
+                        Classic Resume
+                    </p>
+
+                </div>
+
+                <button type="button">
+                    Select Design 8
+                </button>
+
+            </div>
+
+
+            <!-- DESIGN 9 -->
+
+            <div
+                class="design-card"
+                onclick="selectDesign(9)"
+            >
+
+                <div class="design-preview design-9">
+
+                    <h3>
+                        Glass
+                    </h3>
+
+                    <p>
+                        Glassmorphism
+                    </p>
+
+                </div>
+
+                <button type="button">
+                    Select Design 9
+                </button>
+
+            </div>
+
+
+            <!-- DESIGN 10 -->
+
+            <div
+                class="design-card"
+                onclick="selectDesign(10)"
+            >
+
+                <div class="design-preview design-10">
+
+                    <h3>
+                        Gradient
+                    </h3>
+
+                    <p>
+                        Modern Gradient
+                    </p>
+
+                </div>
+
+                <button type="button">
+                    Select Design 10
+                </button>
+
+            </div>
+
+
+            <!-- DESIGN 11 -->
+
+            <div
+                class="design-card"
+                onclick="selectDesign(11)"
+            >
+
+                <div class="design-preview design-11">
+
+                    <h3>
+                        Corporate
+                    </h3>
+
+                    <p>
+                        Business Style
+                    </p>
+
+                </div>
+
+                <button type="button">
+                    Select Design 11
+                </button>
+
+            </div>
+
+
+            <!-- DESIGN 12 -->
+
+            <div
+                class="design-card"
+                onclick="selectDesign(12)"
+            >
+
+                <div class="design-preview design-12">
+
+                    <h3>
+                        Developer
+                    </h3>
+
+                    <p>
+                        Code Portfolio
+                    </p>
+
+                </div>
+
+                <button type="button">
+                    Select Design 12
+                </button>
+
+            </div>
+
+
+            <!-- DESIGN 13 -->
+
+            <div
+                class="design-card"
+                onclick="selectDesign(13)"
+            >
+
+                <div class="design-preview design-13">
+
+                    <h3>
+                        Elegant Dark
+                    </h3>
+
+                    <p>
+                        Premium Style
+                    </p>
+
+                </div>
+
+                <button type="button">
+                    Select Design 13
+                </button>
+
+            </div>
+
+
+            <!-- DESIGN 14 -->
+
+            <div
+                class="design-card"
+                onclick="selectDesign(14)"
+            >
+
+                <div class="design-preview design-14">
+
+                    <h3>
+                        Fresh
+                    </h3>
+
+                    <p>
+                        Fresh & Simple
+                    </p>
+
+                </div>
+
+                <button type="button">
+                    Select Design 14
+                </button>
+
+            </div>
+
+
+            <!-- DESIGN 15 -->
+
+            <div
+                class="design-card"
+                onclick="selectDesign(15)"
+            >
+
+                <div class="design-preview design-15">
+
+                    <h3>
+                        Personal
+                    </h3>
+
+                    <p>
+                        Personal Brand
+                    </p>
+
+                </div>
+
+                <button type="button">
+                    Select Design 15
+                </button>
+
+            </div>
+
+
+            <!-- DESIGN 16 -->
+
+            <div
+                class="design-card"
+                onclick="selectDesign(16)"
+            >
+
+                <div class="design-preview design-16">
+
+                    <h3>
+                        Professional
+                    </h3>
+
+                    <p>
+                        Job Ready
+                    </p>
+
+                </div>
+
+                <button type="button">
+                    Select Design 16
+                </button>
+
+            </div>
+
+
+            <!-- DESIGN 17 -->
+
+            <div
+                class="design-card"
+                onclick="selectDesign(17)"
+            >
+
+                <div class="design-preview design-17">
+
+                    <h3>
+                        Creative Pro
+                    </h3>
+
+                    <p>
+                        Creative & Modern
+                    </p>
+
+                </div>
+
+                <button type="button">
+                    Select Design 17
+                </button>
+
+            </div>
+
+
+            <!-- DESIGN 18 -->
+
+            <div
+                class="design-card"
+                onclick="selectDesign(18)"
+            >
+
+                <div class="design-preview design-18">
+
+                    <h3>
+                        Resume Style
+                    </h3>
+
+                    <p>
+                        Resume Inspired
+                    </p>
+
+                </div>
+
+                <button type="button">
+                    Select Design 18
+                </button>
+
+            </div>
+
+
+            <!-- DESIGN 19 -->
+
+            <div
+                class="design-card"
+                onclick="selectDesign(19)"
+            >
+
+                <div class="design-preview design-19">
+
+                    <h3>
+                        Modern Black
+                    </h3>
+
+                    <p>
+                        Bold & Modern
+                    </p>
+
+                </div>
+
+                <button type="button">
+                    Select Design 19
+                </button>
+
+            </div>
+
+
+            <!-- DESIGN 20 -->
+
+            <div
+                class="design-card"
+                onclick="selectDesign(20)"
+            >
+
+                <div class="design-preview design-20">
+
+                    <h3>
+                        Premium
+                    </h3>
+
+                    <p>
+                        Premium Portfolio
+                    </p>
+
+                </div>
+
+                <button type="button">
+                    Select Design 20
+                </button>
+
+            </div>
+
+        </div>
+
+
+                <p id="selectedDesignText">
+            No design selected
+        </p>
+
+        <!-- ==============================
+             GENERATE
+        ============================== -->
+
+        <button
+            type="button"
+            class="generate-btn"
+            onclick="generatePortfolio()"
+        >
+            Generate Portfolio 🚀
+        </button>
+
+    </section>
+
+</section>
+
+
+<!-- ==============================
+     FOOTER
+============================== -->
+
+<footer>
+
+    <p>
+        © 2026 PortGen | Portfolio Generator
+    </p>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+
+</body>
+
+</html>
