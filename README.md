@@ -38,7 +38,7 @@ The application combines Gemini AI, OCR, PyMuPDF, Tesseract, Python, Flask, HTML
 
 
 
-# ⚙️ ** HOW IT WORKS **
+# ⚙️ HOW IT WORKS 
 
 Resume Upload
       ↓
