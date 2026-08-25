@@ -6,3 +6,22 @@ responsive design.
 
 
 The application combines Gemini AI, OCR, PyMuPDF, Tesseract, Python, Flask, HTML, CSS, and JavaScript to simplify the process of creating a personal portfolio.
+
+
+# 🎯 **Features**
+
+📄 Upload resumes in PDF and image formats
+🔍 Extract text from PDF documents
+👁️ OCR support for scanned documents
+🤖 AI-powered resume parsing using Gemini
+🧑‍💻 Automatically extract:
+Personal information
+Skills
+Education
+Experience
+Projects
+✏️ Edit extracted information before generating the portfolio
+🎨 Multiple portfolio design templates
+🔗 Add GitHub, LinkedIn and other social links
+📜 Certificate upload support
+📱 Responsive web interface
